@@ -68,7 +68,7 @@
   text-align: center;
   line-height: 1;
   letter-spacing: -0.02em;
-  backface-visibility: hidden;
+  backface-visibility: visible;
   overflow: visible;
   will-change: transform;
 }
