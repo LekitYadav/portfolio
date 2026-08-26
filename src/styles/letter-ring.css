@@ -47,15 +47,16 @@
 
 /* --- Per-letter <li> — continuous ribbon segments --- */
 /* Arc length at 28vw radius: 2π×28/68 ≈ 2.59vw per tile.
-   Width 3.1vw + -1.5px margin overlap guarantees full coverage at 3D angles. */
+   Width 2.9vw gives ~0.16vw overlap per side — enough for seamless
+   ribbon at 3D angles, narrow enough that opaque backgrounds never
+   cover adjacent tile text (the "TYAD" clipping bug). */
 .ring li {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 3.1vw;
-  min-width: 3.1vw;
+  width: 2.9vw;
   padding: 0.75em 0;
-  margin: 0 -1.5px;
+  margin: 0;
   white-space: nowrap;
   border: none;
   outline: none;
@@ -67,7 +68,8 @@
   text-align: center;
   line-height: 1;
   letter-spacing: -0.02em;
-  backface-visibility: visible;
+  backface-visibility: hidden;
+  overflow: visible;
   will-change: transform;
 }
 
@@ -219,10 +221,9 @@
   }
 
   .ring li {
-    width: 3.3vw;
-    min-width: 3.3vw;
+    width: 3.1vw;
     padding: 0.65em 0;
-    margin: 0 -1.5px;
+    margin: 0;
   }
 
   .ring li:nth-child(1)  { transform: translate(-50%, -50%) rotate(-24deg) translateY(-30vw) rotateX(90deg); }
