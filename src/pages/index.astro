@@ -234,12 +234,7 @@ const projects = [
       history.replaceState(null, '', window.location.pathname);
     }
 
-    /* Fresh load: always land home — strip any leftover overlay hash.
-       (Back/Forward still works in-session via the popstate listener above.) */
-    if (location.hash) {
-      history.replaceState(null, '', location.pathname + location.search);
-    }
-    showOnly(null);
+    syncFromHash();
   }
 
   if (document.readyState === 'loading') {
