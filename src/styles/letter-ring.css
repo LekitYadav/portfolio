@@ -1,0 +1,296 @@
+/* ============================================
+   3D RIBBON BANDS — candychiu-inspired
+   Two thick continuous interwoven bands
+   Both rings same size, concentric, rotateZ axis
+   ============================================ */
+
+/* --- Container: absolute-centered inside hero --- */
+.ring-container {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  transform-style: preserve-3d;
+}
+
+/* ============================================
+   OVERLAY RINGS — ring inside each overlay
+   ============================================ */
+.overlay-bg-ring {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  perspective: 1200px;
+  opacity: 0.6;
+}
+
+.ring-wrapper {
+  transform: rotate(17deg);
+  transform-style: preserve-3d;
+}
+
+/* --- The <ul> ring --- */
+.ring {
+  margin: 0;
+  list-style: none;
+  font-size: 3vw;
+  font-family: 'Space Mono', monospace;
+  transform-style: preserve-3d;
+  text-transform: uppercase;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+/* --- Per-letter <li> — continuous ribbon segments --- */
+/* Arc length at 28vw radius: 2π×28/68 ≈ 2.59vw per tile.
+   Width 3.1vw + -1.5px margin overlap guarantees full coverage at 3D angles. */
+.ring li {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3.1vw;
+  min-width: 3.1vw;
+  padding: 0.75em 0;
+  margin: 0 -1.5px;
+  white-space: nowrap;
+  border: none;
+  outline: none;
+  background-clip: border-box;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  backface-visibility: visible;
+  will-change: transform;
+}
+
+/* ============================================
+   DARK VARIANT (outer band)
+   bg: #1A1207  text: #FFF8EE
+   ============================================ */
+.ring-dark li {
+  background-color: var(--text-primary, #1A1207);
+  color: var(--text-inverse, #FFF8EE);
+}
+
+/* ============================================
+   LIGHT VARIANT (inner band)
+   bg: #FFF8EE  text: #1A1207
+   ============================================ */
+.ring-light li {
+  background-color: var(--text-inverse, #FFF8EE);
+  color: var(--text-primary, #1A1207);
+}
+
+/* ============================================
+   PER-LETTER TRANSFORMS — 68 items, 6° steps
+   Both rings same radius: 28vw
+   ============================================ */
+
+.ring li:nth-child(1)  { transform: translate(-50%, -50%) rotate(-24deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(2)  { transform: translate(-50%, -50%) rotate(-18deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(3)  { transform: translate(-50%, -50%) rotate(-12deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(4)  { transform: translate(-50%, -50%) rotate(-6deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(5)  { transform: translate(-50%, -50%) rotate(0deg)   translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(6)  { transform: translate(-50%, -50%) rotate(6deg)   translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(7)  { transform: translate(-50%, -50%) rotate(12deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(8)  { transform: translate(-50%, -50%) rotate(18deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(9)  { transform: translate(-50%, -50%) rotate(24deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(10) { transform: translate(-50%, -50%) rotate(30deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(11) { transform: translate(-50%, -50%) rotate(36deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(12) { transform: translate(-50%, -50%) rotate(42deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(13) { transform: translate(-50%, -50%) rotate(48deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(14) { transform: translate(-50%, -50%) rotate(54deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(15) { transform: translate(-50%, -50%) rotate(60deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(16) { transform: translate(-50%, -50%) rotate(66deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(17) { transform: translate(-50%, -50%) rotate(72deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(18) { transform: translate(-50%, -50%) rotate(78deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(19) { transform: translate(-50%, -50%) rotate(84deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(20) { transform: translate(-50%, -50%) rotate(90deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(21) { transform: translate(-50%, -50%) rotate(96deg)  translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(22) { transform: translate(-50%, -50%) rotate(102deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(23) { transform: translate(-50%, -50%) rotate(108deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(24) { transform: translate(-50%, -50%) rotate(114deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(25) { transform: translate(-50%, -50%) rotate(120deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(26) { transform: translate(-50%, -50%) rotate(126deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(27) { transform: translate(-50%, -50%) rotate(132deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(28) { transform: translate(-50%, -50%) rotate(138deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(29) { transform: translate(-50%, -50%) rotate(144deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(30) { transform: translate(-50%, -50%) rotate(150deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(31) { transform: translate(-50%, -50%) rotate(156deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(32) { transform: translate(-50%, -50%) rotate(162deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(33) { transform: translate(-50%, -50%) rotate(168deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(34) { transform: translate(-50%, -50%) rotate(174deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(35) { transform: translate(-50%, -50%) rotate(180deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(36) { transform: translate(-50%, -50%) rotate(186deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(37) { transform: translate(-50%, -50%) rotate(192deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(38) { transform: translate(-50%, -50%) rotate(198deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(39) { transform: translate(-50%, -50%) rotate(204deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(40) { transform: translate(-50%, -50%) rotate(210deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(41) { transform: translate(-50%, -50%) rotate(216deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(42) { transform: translate(-50%, -50%) rotate(222deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(43) { transform: translate(-50%, -50%) rotate(228deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(44) { transform: translate(-50%, -50%) rotate(234deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(45) { transform: translate(-50%, -50%) rotate(240deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(46) { transform: translate(-50%, -50%) rotate(246deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(47) { transform: translate(-50%, -50%) rotate(252deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(48) { transform: translate(-50%, -50%) rotate(258deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(49) { transform: translate(-50%, -50%) rotate(264deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(50) { transform: translate(-50%, -50%) rotate(270deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(51) { transform: translate(-50%, -50%) rotate(276deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(52) { transform: translate(-50%, -50%) rotate(282deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(53) { transform: translate(-50%, -50%) rotate(288deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(54) { transform: translate(-50%, -50%) rotate(294deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(55) { transform: translate(-50%, -50%) rotate(300deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(56) { transform: translate(-50%, -50%) rotate(306deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(57) { transform: translate(-50%, -50%) rotate(312deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(58) { transform: translate(-50%, -50%) rotate(318deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(59) { transform: translate(-50%, -50%) rotate(324deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(60) { transform: translate(-50%, -50%) rotate(330deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(61) { transform: translate(-50%, -50%) rotate(336deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(62) { transform: translate(-50%, -50%) rotate(342deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(63) { transform: translate(-50%, -50%) rotate(348deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(64) { transform: translate(-50%, -50%) rotate(354deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(65) { transform: translate(-50%, -50%) rotate(360deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(66) { transform: translate(-50%, -50%) rotate(366deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(67) { transform: translate(-50%, -50%) rotate(372deg) translateY(-28vw) rotateX(90deg); }
+.ring li:nth-child(68) { transform: translate(-50%, -50%) rotate(378deg) translateY(-28vw) rotateX(90deg); }
+
+/* ============================================
+   ANIMATIONS — Two-layer architecture
+   Ring spin: rotateZ linear (horizontal belt spin)
+   Wrapper bounce: rotateX subtle wobble
+   ============================================ */
+
+/* --- Z rotation: pure linear, horizontal belt spin --- */
+.ring-outer .ring {
+  animation: spin-z 18s linear infinite;
+}
+
+.ring-inner .ring {
+  animation: spin-z-rev 24s linear infinite;
+}
+
+@keyframes spin-z {
+  from { transform: rotateX(-110deg) rotateZ(0deg) translateZ(1.9vw); }
+  to   { transform: rotateX(-110deg) rotateZ(-360deg) translateZ(1.9vw); }
+}
+
+@keyframes spin-z-rev {
+  from { transform: rotateX(-110deg) rotateZ(0deg) translateZ(-1.9vw); }
+  to   { transform: rotateX(-110deg) rotateZ(360deg) translateZ(-1.9vw); }
+}
+
+/* --- X tilt bounce: subtle wobble, ping-pong --- */
+.ring-outer .ring-wrapper {
+  transform: rotate(17deg) translateY(0.5vw);
+  animation: bounce-x 3.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate;
+}
+
+.ring-inner .ring-wrapper {
+  transform: rotate(17deg) translateY(-0.4vw);
+  animation: bounce-x-rev 4s cubic-bezier(0.34, 1.56, 0.64, 1) infinite alternate-reverse;
+}
+
+@keyframes bounce-x {
+  0%   { transform: rotate(17deg) translateY(0.5vw) rotateX(-4deg); }
+  100% { transform: rotate(17deg) translateY(0.5vw) rotateX(4deg); }
+}
+
+@keyframes bounce-x-rev {
+  0%   { transform: rotate(17deg) translateY(-0.4vw) rotateX(-3deg); }
+  100% { transform: rotate(17deg) translateY(-0.4vw) rotateX(3deg); }
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .ring {
+    font-size: 4vw;
+  }
+
+  .ring li {
+    width: 3.3vw;
+    min-width: 3.3vw;
+    padding: 0.65em 0;
+    margin: 0 -1.5px;
+  }
+
+  .ring li:nth-child(1)  { transform: translate(-50%, -50%) rotate(-24deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(2)  { transform: translate(-50%, -50%) rotate(-18deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(3)  { transform: translate(-50%, -50%) rotate(-12deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(4)  { transform: translate(-50%, -50%) rotate(-6deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(5)  { transform: translate(-50%, -50%) rotate(0deg)   translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(6)  { transform: translate(-50%, -50%) rotate(6deg)   translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(7)  { transform: translate(-50%, -50%) rotate(12deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(8)  { transform: translate(-50%, -50%) rotate(18deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(9)  { transform: translate(-50%, -50%) rotate(24deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(10) { transform: translate(-50%, -50%) rotate(30deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(11) { transform: translate(-50%, -50%) rotate(36deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(12) { transform: translate(-50%, -50%) rotate(42deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(13) { transform: translate(-50%, -50%) rotate(48deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(14) { transform: translate(-50%, -50%) rotate(54deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(15) { transform: translate(-50%, -50%) rotate(60deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(16) { transform: translate(-50%, -50%) rotate(66deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(17) { transform: translate(-50%, -50%) rotate(72deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(18) { transform: translate(-50%, -50%) rotate(78deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(19) { transform: translate(-50%, -50%) rotate(84deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(20) { transform: translate(-50%, -50%) rotate(90deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(21) { transform: translate(-50%, -50%) rotate(96deg)  translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(22) { transform: translate(-50%, -50%) rotate(102deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(23) { transform: translate(-50%, -50%) rotate(108deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(24) { transform: translate(-50%, -50%) rotate(114deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(25) { transform: translate(-50%, -50%) rotate(120deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(26) { transform: translate(-50%, -50%) rotate(126deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(27) { transform: translate(-50%, -50%) rotate(132deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(28) { transform: translate(-50%, -50%) rotate(138deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(29) { transform: translate(-50%, -50%) rotate(144deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(30) { transform: translate(-50%, -50%) rotate(150deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(31) { transform: translate(-50%, -50%) rotate(156deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(32) { transform: translate(-50%, -50%) rotate(162deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(33) { transform: translate(-50%, -50%) rotate(168deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(34) { transform: translate(-50%, -50%) rotate(174deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(35) { transform: translate(-50%, -50%) rotate(180deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(36) { transform: translate(-50%, -50%) rotate(186deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(37) { transform: translate(-50%, -50%) rotate(192deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(38) { transform: translate(-50%, -50%) rotate(198deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(39) { transform: translate(-50%, -50%) rotate(204deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(40) { transform: translate(-50%, -50%) rotate(210deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(41) { transform: translate(-50%, -50%) rotate(216deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(42) { transform: translate(-50%, -50%) rotate(222deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(43) { transform: translate(-50%, -50%) rotate(228deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(44) { transform: translate(-50%, -50%) rotate(234deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(45) { transform: translate(-50%, -50%) rotate(240deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(46) { transform: translate(-50%, -50%) rotate(246deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(47) { transform: translate(-50%, -50%) rotate(252deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(48) { transform: translate(-50%, -50%) rotate(258deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(49) { transform: translate(-50%, -50%) rotate(264deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(50) { transform: translate(-50%, -50%) rotate(270deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(51) { transform: translate(-50%, -50%) rotate(276deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(52) { transform: translate(-50%, -50%) rotate(282deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(53) { transform: translate(-50%, -50%) rotate(288deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(54) { transform: translate(-50%, -50%) rotate(294deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(55) { transform: translate(-50%, -50%) rotate(300deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(56) { transform: translate(-50%, -50%) rotate(306deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(57) { transform: translate(-50%, -50%) rotate(312deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(58) { transform: translate(-50%, -50%) rotate(318deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(59) { transform: translate(-50%, -50%) rotate(324deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(60) { transform: translate(-50%, -50%) rotate(330deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(61) { transform: translate(-50%, -50%) rotate(336deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(62) { transform: translate(-50%, -50%) rotate(342deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(63) { transform: translate(-50%, -50%) rotate(348deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(64) { transform: translate(-50%, -50%) rotate(354deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(65) { transform: translate(-50%, -50%) rotate(360deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(66) { transform: translate(-50%, -50%) rotate(366deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(67) { transform: translate(-50%, -50%) rotate(372deg) translateY(-30vw) rotateX(90deg); }
+  .ring li:nth-child(68) { transform: translate(-50%, -50%) rotate(378deg) translateY(-30vw) rotateX(90deg); }
+}

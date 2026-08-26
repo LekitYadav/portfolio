@@ -1,0 +1,23 @@
+---
+interface Props {
+  text: string;
+  variant?: 'light' | 'dark';
+  class?: string;
+}
+
+const { text, variant = 'dark', class: className = '' } = Astro.props;
+// Repeat text enough to fill 68 positions (Candychiu standard), then trim
+const repeated = (text.repeat(8)).slice(0, 68);
+const chars = repeated.split('');
+const variantClass = variant === 'light' ? 'ring-light' : 'ring-dark';
+---
+
+<div class:list={['ring-container', variantClass, className]} aria-hidden="true">
+  <div class="ring-wrapper">
+    <ul class="ring">
+      {chars.map((char) => (
+        <li>{char}</li>
+      ))}
+    </ul>
+  </div>
+</div>

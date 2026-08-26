@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="KindMindsAI — Lekit Yadav" bodyClass="project-detail">
+  <div class="project-header">
+    <h1 class="fluid-lg">KindMindsAI</h1>
+    <p class="project-subtitle">Mental Health Support Platform</p>
+  </div>
+
+  <div class="project-detail-layout">
+    <aside class="project-sidebar">
+      <dl class="project-meta">
+        <dt>Year</dt>
+        <dd>2024</dd>
+
+        <dt>Stack</dt>
+        <dd>Python, NLTK, Scikit-learn</dd>
+
+        <dt>Type</dt>
+        <dd>Conversational AI</dd>
+
+        <dt>Source</dt>
+        <dd>
+          <a href="https://github.com/LekitYadav" target="_blank" rel="noopener" class="project-link">
+            View on GitHub
+          </a>
+        </dd>
+      </dl>
+    </aside>
+
+    <div class="project-main">
+      <div class="project-description">
+        <p class="mb-4">
+          A conversational AI platform designed to provide accessible mental health support through
+          intent-based dialogue. The system classifies user input into 10+ mental health intent
+          categories and returns contextually appropriate responses — with built-in ethical guardrails
+          for high-risk situations.
+        </p>
+
+        <h2 class="fluid-sm mb-2">Architecture</h2>
+        <p class="mb-3">
+          Built on an NLTK and Scikit-learn pipeline that processes raw user text through tokenization,
+          intent classification, and response generation. Each conversation turn is classified against
+          a trained intent model before a response is selected from a curated knowledge base.
+        </p>
+
+        <h2 class="fluid-sm mb-2">Pipeline</h2>
+        <ul class="project-list">
+          <li>Text preprocessing with NLTK — tokenization, lemmatization, stopword removal</li>
+          <li>Intent classification across 10+ categories (anxiety, stress, depression, loneliness, etc.)</li>
+          <li>Scikit-learn model trained on labeled intent dataset with TF-IDF vectorization</li>
+          <li>Response selection engine with confidence scoring and fallback handling</li>
+          <li>Ethical guardrails: detects high-risk inputs (self-harm language) and routes to crisis resources</li>
+        </ul>
+
+        <h2 class="fluid-sm mb-2 mt-4">Ethical Design</h2>
+        <p>
+          Mental health AI demands careful boundary-setting. The system is explicitly designed as a
+          support tool, not a replacement for professional care. High-risk intent detection triggers
+          immediate redirection to crisis helplines and emergency resources. The response system
+          avoids diagnostic language and maintains empathetic, supportive tone throughout.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  :root {
+    --bg-dark: #1A1207;
+  }
+
+  body.project-detail {
+    background: var(--bg-dark) !important;
+    color: var(--text-inverse) !important;
+  }
+
+  .project-detail .nav,
+  .project-detail .footer {
+    background: var(--bg-dark);
+    border-color: rgba(255, 248, 238, 0.15);
+    mix-blend-mode: difference;
+  }
+
+  .project-detail .nav-left,
+  .project-detail .nav-center a,
+  .project-detail .nav-email,
+  .project-detail .footer-left,
+  .project-detail .footer-center a,
+  .project-detail .footer-right {
+    color: var(--text-inverse);
+  }
+
+  .project-header {
+    margin-bottom: calc(var(--gutter) * 3);
+  }
+
+  .project-subtitle {
+    font-size: clamp(0.8rem, 1.2vw, 1.1rem);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-top: 0.5em;
+  }
+
+  .project-detail-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: calc(var(--gutter) * 3);
+  }
+
+  .project-sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--gutter) * 2);
+    align-self: start;
+  }
+
+  .project-meta dt {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-top: 1.5em;
+    border-bottom: 1px solid rgba(255, 248, 238, 0.15);
+    padding-bottom: 0.3em;
+  }
+
+  .project-meta dt:first-child {
+    margin-top: 0;
+  }
+
+  .project-meta dd {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 0.5em;
+  }
+
+  .project-meta dd a {
+    color: var(--text-inverse);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .project-main {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    line-height: 1.7;
+  }
+
+  .project-main h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-list {
+    padding-left: 1.2em;
+    list-style: none;
+  }
+
+  .project-list li {
+    position: relative;
+    padding-left: 1em;
+    margin-bottom: 0.75em;
+  }
+
+  .project-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  .project-link {
+    display: inline-block;
+    padding: 0.4em 1em;
+    border: 1px solid var(--text-inverse);
+    text-decoration: none !important;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .project-link:hover {
+    background: var(--text-inverse);
+    color: var(--bg-dark);
+  }
+
+  @media (max-width: 768px) {
+    .project-detail-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .project-sidebar {
+      position: static;
+    }
+  }
+</style>

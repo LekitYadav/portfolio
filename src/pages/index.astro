@@ -1,0 +1,531 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DraggableProjects from '../components/DraggableProjects';
+import LetterRing from '../components/LetterRing.astro';
+
+const bgInnerText = 'LEKITYADAV.ME · ';
+
+const projects = [
+  {
+    title: 'Movie Recommender System',
+    slug: 'movie-recommender',
+    image: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&h=675&fit=crop&crop=center',
+    tags: ['Python', 'ML', 'NLP'],
+    width: 520,
+    height: 340,
+  },
+  {
+    title: 'KindMindsAI',
+    slug: 'kindmindsai',
+    image: 'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&h=675&fit=crop&crop=center',
+    tags: ['NLP', 'Scikit-learn', 'AI'],
+    width: 480,
+    height: 320,
+  },
+  {
+    title: 'DataViz Lab',
+    slug: '',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=675&fit=crop&crop=center',
+    tags: ['D3.js', 'Interactive'],
+    width: 500,
+    height: 330,
+  },
+  {
+    title: 'LLM Experiments',
+    slug: '',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&h=675&fit=crop&crop=center',
+    tags: ['GPT', 'LangChain'],
+    width: 460,
+    height: 350,
+  },
+  {
+    title: 'API Gateway',
+    slug: '',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=675&fit=crop&crop=center',
+    tags: ['REST', 'Microservices'],
+    width: 500,
+    height: 330,
+  },
+];
+---
+
+<BaseLayout title="Lekit Yadav — Portfolio">
+  <section class="hero">
+    <LetterRing text={bgInnerText} variant="dark" class="ring-outer" />
+    <LetterRing text={bgInnerText} variant="light" class="ring-inner" />
+  </section>
+
+  <!-- ═══════════ Projects overlay ═══════════ -->
+  <div id="projects-overlay" class="site-overlay projects-overlay">
+    <div class="overlay-bg-ring">
+      <LetterRing text="LEKITYADAV.ME · " variant="light" class="ring-inner" />
+    </div>
+    <DraggableProjects client:load projects={projects} />
+  </div>
+
+  <!-- ═══════════ Info overlay ═══════════ -->
+  <div id="info-overlay" class="site-overlay info-overlay">
+    <div class="overlay-bg-ring">
+      <LetterRing text="LEKITYADAV.ME · " variant="dark" class="ring-inner" />
+    </div>
+    <div class="info-grid">
+      <section class="info-section">
+        <p>
+          I'm a B.Tech CSE (AI & ML) student, and honestly I'm more into backend development and software engineering these days than pure ML, even though AI is still a big part of what I do. I like knowing how things actually work under the hood — not just using an app, but understanding what's happening when you click that button.
+        </p>
+        <p>
+          Right now I'm building up my skills in Python, C++, Java, SQL, DSA, OOP, Machine Learning and NLP. I learn best by just building stuff, breaking it, figuring out why it broke, and trying again — that's basically my whole process honestly. Tutorials only get you so far.
+        </p>
+        <p>
+          I'm slowly moving more towards backend and software dev, but AI/ML isn't going anywhere, it's still a core part of my journey, just not the only part anymore.
+        </p>
+        <p>
+          When I'm not coding I'm probably gaming, at the gym, or swimming. Outside of that I try to just be a genuine person — what you see is what you get with me, I don't really do the "curated version of myself" thing. I ask a lot of questions, I admit when I don't know something (which is often lol), and I'd rather be real than impressive.
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- ═══════════ Contact overlay ═══════════ -->
+  <div id="contact-overlay" class="site-overlay contact-overlay">
+    <div class="overlay-bg-ring">
+      <LetterRing text="LEKITYADAV.ME · " variant="light" class="ring-inner" />
+    </div>
+    <div class="contact-section">
+      <h1 class="fluid-lg mb-4">Say hi.</h1>
+
+      <div class="contact-grid">
+        <form
+          class="hi-form"
+          action="https://formsubmit.co/lekityadav@gmail.com"
+          method="POST"
+        >
+          <input type="hidden" name="_subject" value="Portfolio — New message" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_next" value="" id="redirect-next" />
+
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required autocomplete="name" />
+          </div>
+
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required autocomplete="email" />
+          </div>
+
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required placeholder="Say hi..."></textarea>
+          </div>
+
+          <button type="submit">→ say hi</button>
+        </form>
+      </div>
+
+      <div class="contact-card">
+        <img src="/lekit-card.png" alt="Lekit — Hans-VIII Personnel Identity Card" />
+      </div>
+
+      <p class="sent-msg" id="sent-msg" aria-live="polite">Message sent. Thanks for saying hi!</p>
+    </div>
+  </div>
+
+</BaseLayout>
+
+<script is:inline>
+  /* ── Overlay manager ── */
+  const overlays = {
+    projects: document.getElementById('projects-overlay'),
+    info:     document.getElementById('info-overlay'),
+    contact:  document.getElementById('contact-overlay'),
+  };
+
+  const triggers = {
+    projects: document.getElementById('projects-trigger'),
+    info:     document.getElementById('info-trigger'),
+    contact:  document.getElementById('contact-trigger'),
+  };
+
+  const closeBtn = document.getElementById('projects-close');
+
+  const bodyClasses = {
+    projects: 'projects-open',
+    info:     'info-open',
+    contact:  'contact-open',
+  };
+
+  /* Show exactly one overlay (or none when name is null). DOM only, no history. */
+  function showOnly(name) {
+    Object.keys(overlays).forEach(k => {
+      overlays[k]?.classList.toggle('open', k === name);
+    });
+    Object.keys(bodyClasses).forEach(k => {
+      document.body.classList.toggle(bodyClasses[k], k === name);
+    });
+    document.body.style.overflow = name ? 'hidden' : '';
+    if (name === 'projects') {
+      requestAnimationFrame(() => window.dispatchEvent(new Event('projects-open')));
+    }
+  }
+
+  /* Sync view to the current URL hash (#projects / #info / #contact / none). */
+  function syncFromHash() {
+    const name = location.hash.replace(/^#/, '');
+    showOnly(overlays[name] ? name : null);
+  }
+
+  function openOverlay(name) {
+    if (location.hash !== '#' + name) {
+      history.pushState({ overlay: name }, '', '#' + name);
+    }
+    showOnly(name);
+  }
+
+  /* Close via UI (×, ESC, backdrop). Clean the URL, don't pop (so Back never reopens it). */
+  function closeOverlay() {
+    showOnly(null);
+    if (location.hash) {
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+  }
+
+  function getOpenName() {
+    return Object.keys(overlays).find(k => overlays[k]?.classList.contains('open'));
+  }
+
+  function bind() {
+    /* Triggers */
+    Object.keys(triggers).forEach(name => {
+      triggers[name]?.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (overlays[name]?.classList.contains('open')) {
+          closeOverlay();
+        } else {
+          openOverlay(name);
+        }
+      });
+    });
+
+    /* × close button — closes whichever overlay is open */
+    closeBtn?.addEventListener('click', closeOverlay);
+
+    /* Backdrop clicks no longer close — only × / ESC close the overlay */
+
+    /* ESC closes whichever is open */
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && getOpenName()) closeOverlay();
+    });
+
+    /* Back/Forward — keep the view in sync with history */
+    window.addEventListener('popstate', syncFromHash);
+
+    /* ── Contact form redirect fix ── */
+    const nextInput = document.getElementById('redirect-next');
+    if (nextInput) {
+      nextInput.value = window.location.origin + '/?sent=1';
+    }
+
+    if (new URLSearchParams(window.location.search).get('sent') === '1') {
+      showOnly('contact');
+      const el = document.getElementById('sent-msg');
+      if (el) el.style.display = 'block';
+      history.replaceState(null, '', window.location.pathname);
+    }
+
+    /* Fresh load: always land home — strip any leftover overlay hash.
+       (Back/Forward still works in-session via the popstate listener above.) */
+    if (location.hash) {
+      history.replaceState(null, '', location.pathname + location.search);
+    }
+    showOnly(null);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bind);
+  } else {
+    bind();
+  }
+</script>
+
+<style>
+  /* ============================================
+     HERO
+     ============================================ */
+  .hero {
+    position: relative;
+    height: calc(100vh - 4vh);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    padding: 4vh 0;
+  }
+
+  /* ============================================
+     SHARED OVERLAY BASE
+     ============================================ */
+  .site-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+  }
+
+  .site-overlay.open {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Reduced motion ── */
+  @media (prefers-reduced-motion: reduce) {
+    .site-overlay {
+      transition-duration: 0.15s !important;
+      transition-delay: 0s !important;
+    }
+    .info-section p {
+      transition-duration: 0.01s !important;
+      transition-delay: 0s !important;
+    }
+  }
+
+  /* ============================================
+     PROJECTS OVERLAY
+     ============================================ */
+  .projects-overlay {
+    background: var(--projects-bg);
+  }
+
+  /* ============================================
+     INFO OVERLAY
+     ============================================ */
+  .info-overlay {
+    background: var(--info-bg);
+    padding: calc(var(--nav-height) + var(--gutter)) var(--gutter) calc(var(--footer-height) + var(--gutter));
+  }
+
+  .info-grid {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+  }
+
+  .info-section {
+    margin-bottom: calc(var(--gutter) * 3);
+  }
+
+  .info-section p {
+    font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+    line-height: 1.7;
+    margin-bottom: calc(var(--gutter) * 1.5);
+    padding: calc(var(--gutter) * 1.2) var(--gutter);
+    background: #FFF8EE;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: 2px 2px 0 var(--border);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      box-shadow 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .info-overlay.open .info-section p:nth-child(1) { opacity: 1; transform: translateY(0); transition-delay: 0.08s; }
+  .info-overlay.open .info-section p:nth-child(2) { opacity: 1; transform: translateY(0); transition-delay: 0.16s; }
+  .info-overlay.open .info-section p:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 0.24s; }
+  .info-overlay.open .info-section p:nth-child(4) { opacity: 1; transform: translateY(0); transition-delay: 0.32s; }
+
+  .info-section p:hover {
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 var(--border);
+    border-color: var(--text);
+  }
+
+  /* ============================================
+     CONTACT OVERLAY
+     ============================================ */
+  .contact-overlay {
+    background: #050505;
+  }
+
+  .contact-section {
+    position: relative;
+    z-index: 1;
+    padding: calc(var(--nav-height) + var(--gutter)) var(--gutter) calc(var(--footer-height) + var(--gutter));
+    color: var(--text-inverse);
+    display: grid;
+    grid-template-columns: minmax(320px, 600px) minmax(280px, 420px);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    justify-content: start;
+    min-height: calc(100vh - var(--nav-height) - var(--footer-height));
+    overflow: visible;
+  }
+
+  .contact-section h1 {
+    grid-column: 1 / -1;
+  }
+
+  .contact-section .sent-msg {
+    grid-column: 1 / -1;
+  }
+
+  /* ── Form wrapper ── */
+  .contact-grid {
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 900px) {
+    .contact-section {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .contact-card {
+    position: absolute;
+    top: calc(var(--nav-height) + 28px);
+    right: 72px;
+    width: min(320px, 30vw);
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+  }
+
+  .contact-card img {
+    max-width: 320px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-card {
+      position: relative;
+      top: auto;
+      right: auto;
+      width: 100%;
+      max-width: 360px;
+      margin: 1.5rem auto 0;
+    }
+  }
+
+  .contact-card img {
+    max-width: 340px;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    opacity: 0;
+    animation: card-fade-in 0.8s ease 0.3s forwards;
+  }
+
+  @keyframes card-fade-in {
+    0%   { opacity: 0; transform: translateY(12px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── Form (dark-mode adapted) ── */
+  .hi-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gutter);
+    max-width: 600px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4em;
+  }
+
+  .field label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-inverse);
+  }
+
+  .field input,
+  .field textarea {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95rem;
+    background: transparent;
+    color: var(--text-inverse);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+    padding: 0.75em;
+    outline: none;
+    transition: outline 0.15s ease, border-color 0.15s ease;
+  }
+
+  .field input::placeholder,
+  .field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+  }
+
+  .field input:focus,
+  .field textarea:focus {
+    outline: 2px solid var(--bg-hazel);
+    outline-offset: -1px;
+  }
+
+  .field textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+
+  .hi-form button {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: transparent;
+    color: var(--text-inverse);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 0;
+    padding: 0.85em 1.5em;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    align-self: flex-start;
+  }
+
+  .hi-form button:hover {
+    background: var(--text-inverse);
+    color: #050505;
+  }
+
+  /* ── Sent message ── */
+  .sent-msg {
+    display: none;
+    margin-top: var(--gutter);
+    padding: 0.75em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-inverse);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+
+  /* ── Fallback links ── */
+  .contact-fallback {
+    margin-top: calc(var(--gutter) * 2);
+    font-size: 0.85rem;
+    line-height: 2;
+    opacity: 0.65;
+    color: var(--text-inverse);
+  }
+
+  .contact-fallback a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

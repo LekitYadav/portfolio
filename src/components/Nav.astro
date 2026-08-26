@@ -1,0 +1,35 @@
+---
+---
+
+<nav class="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-left">
+    <div class="nav-title">
+      <span>Multidisciplinary Design</span>
+      <span>Backend Engineering</span>
+    </div>
+  </div>
+
+  <div class="nav-center" id="nav-menu">
+    <button id="projects-trigger" class="nav-link-btn" aria-label="Open projects overlay">projects</button>
+    <button id="info-trigger" class="nav-link-btn" aria-label="Open info overlay">about me</button>
+    <button id="contact-trigger" class="nav-link-btn" aria-label="Open contact overlay">contact</button>
+    <button id="projects-close" class="nav-link-btn projects-close-nav" aria-label="Close overlay">&times; close</button>
+  </div>
+
+  <a href="mailto:lekityadav@gmail.com" class="nav-email-vertical">lekityadav@gmail.com</a>
+
+  <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('nav-menu');
+  toggle?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+</script>

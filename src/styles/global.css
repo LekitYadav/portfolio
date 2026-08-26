@@ -1,0 +1,460 @@
+/* ============================================
+   TOKENS
+   ============================================ */
+:root {
+  --bg-hazel: #DDB88C;
+  --bg-hazel-deep: #C9A47A;
+  --projects-bg: #C08050;
+  --bg-dark: #1A1207;
+  --text-primary: #1A1207;
+  --text-inverse: #FFF8EE;
+  --border: #1A1207;
+  --grey: #E8DCC8;
+  --info-bg: #EDE6D6;
+  --nav-height: 80px;
+  --footer-height: 60px;
+  --gutter: 15px;
+}
+
+/* ============================================
+   RESET
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  background: var(--bg-hazel);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--bg-hazel-deep);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============================================
+   FLUID TYPE (vw-based, candychiu style)
+   ============================================ */
+.fluid-xl {
+  font-size: clamp(2rem, 6vw, 6rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.fluid-lg {
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.fluid-md {
+  font-size: clamp(1.1rem, 2.5vw, 2.5rem);
+  line-height: 1.2;
+}
+
+.fluid-sm {
+  font-size: clamp(0.8rem, 1.2vw, 1.2rem);
+  line-height: 1.4;
+}
+
+/* ============================================
+   NAV
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter);
+  border-bottom: none;
+  background: var(--bg-hazel);
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.nav-left {
+  flex: 1;
+  white-space: nowrap;
+}
+
+.nav-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.nav-center {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+  padding-right: 50px;
+}
+
+.nav-center a,
+.nav-link-btn {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-center a:hover,
+.nav-link-btn:hover {
+  opacity: 0.6;
+}
+
+/* Close button in nav — hidden until any overlay is open */
+.projects-close-nav {
+  display: none;
+}
+body.projects-open .projects-close-nav,
+body.info-open .projects-close-nav,
+body.contact-open .projects-close-nav {
+  display: inline;
+}
+body.projects-open .projects-close-nav:hover,
+body.info-open .projects-close-nav:hover,
+body.contact-open .projects-close-nav:hover {
+  opacity: 0.6;
+}
+
+.nav-right {
+  flex: 1;
+  text-align: right;
+}
+
+.nav-email-vertical {
+  position: fixed;
+  right: var(--gutter);
+  top: 15px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  z-index: 1001;
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.menu-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  margin: 5px 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-center {
+    display: none;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background: var(--bg-hazel);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0;
+    gap: 1.5rem;
+  }
+
+  .nav-center.open {
+    display: flex;
+  }
+
+  .nav-email-vertical {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-left {
+    flex: 1;
+  }
+
+  .nav-right {
+    flex: 0;
+    text-align: right;
+  }
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--footer-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--gutter);
+  background: var(--bg-hazel);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.footer-left {
+  flex: 1;
+}
+
+.footer-center {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.footer-center a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.footer-center a:hover {
+  opacity: 0.6;
+}
+
+.footer-right {
+  flex: 1;
+  text-align: right;
+}
+
+/* ============================================
+   CONTENT SPACER (account for fixed nav/footer)
+   ============================================ */
+.page-content {
+  padding-top: calc(var(--nav-height) + var(--gutter));
+  padding-bottom: calc(var(--footer-height) + var(--gutter));
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  min-height: 100vh;
+}
+
+/* ============================================
+   PROJECT DETAIL
+   ============================================ */
+.project-detail {
+  background: var(--bg-dark);
+  color: var(--text-inverse);
+}
+
+.project-detail .nav,
+.project-detail .footer {
+  background: var(--bg-dark);
+  mix-blend-mode: difference;
+}
+
+.project-detail .page-content {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: calc(var(--gutter) * 2);
+}
+
+@media (max-width: 768px) {
+  .project-detail .page-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-meta {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 2;
+}
+
+.project-meta dt {
+  opacity: 0.5;
+  margin-top: 1em;
+}
+
+.project-meta dt:first-child {
+  margin-top: 0;
+}
+
+.project-meta dd {
+  margin-bottom: 0.5em;
+}
+
+.project-description {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  line-height: 1.6;
+}
+
+.project-link {
+  display: inline-block;
+  margin-top: 2rem;
+  padding: 0.5em 1em;
+  border: 1px solid var(--text-inverse);
+  text-decoration: none;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: background 0.3s, color 0.3s;
+}
+
+.project-link:hover {
+  background: var(--text-inverse);
+  color: var(--bg-dark);
+}
+
+/* PROJECTS OVERLAY — rammed earth header/footer to match */
+body.projects-open .nav,
+body.projects-open .footer {
+  background: var(--projects-bg);
+  color: var(--text-primary);
+}
+body.projects-open .nav-center a,
+body.projects-open .nav-link-btn,
+body.projects-open .nav-email-vertical,
+body.projects-open .footer a {
+  color: var(--text-primary);
+}
+body.projects-open .menu-toggle span {
+  background: var(--text-primary);
+}
+@media (max-width: 768px) {
+  body.projects-open .nav-center {
+    background: var(--projects-bg);
+  }
+}
+
+/* ============================================
+   INFO OVERLAY — nav/footer match parchment bg
+   ============================================ */
+body.info-open .nav,
+body.info-open .footer {
+  background: var(--info-bg);
+}
+
+body.info-open .menu-toggle span {
+  background: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  body.info-open .nav-center {
+    background: var(--info-bg);
+  }
+}
+
+/* ============================================
+   CONTACT OVERLAY — nav/footer darken when open
+   ============================================ */
+@keyframes contact-darken {
+  0%   { background-color: var(--bg-hazel); }
+  100% { background-color: #050505; }
+}
+
+body.contact-open {
+  background: #050505;
+}
+
+body.contact-open .nav,
+body.contact-open .footer {
+  animation: contact-darken 0.6s ease forwards;
+  color: var(--text-inverse);
+}
+
+body.contact-open .nav-center {
+  border-color: transparent;
+}
+
+body.contact-open .menu-toggle span {
+  background: var(--text-inverse);
+}
+
+@media (max-width: 768px) {
+  body.contact-open .nav-center {
+    background-color: #050505;
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+  }
+
+  body.contact-open .nav-center a,
+  body.contact-open .nav-link-btn {
+    color: var(--text-inverse);
+  }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+.mt-1 { margin-top: calc(var(--gutter) * 0.5); }
+.mt-2 { margin-top: var(--gutter); }
+.mt-3 { margin-top: calc(var(--gutter) * 1.5); }
+.mt-4 { margin-top: calc(var(--gutter) * 2); }
+.mb-1 { margin-bottom: calc(var(--gutter) * 0.5); }
+.mb-2 { margin-bottom: var(--gutter); }
+.mb-3 { margin-bottom: calc(var(--gutter) * 1.5); }
+.mb-4 { margin-bottom: calc(var(--gutter) * 2); }
+
+.text-center { text-align: center; }
+.uppercase { text-transform: uppercase; letter-spacing: 0.05em; }

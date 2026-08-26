@@ -1,0 +1,189 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Movie Recommender System — Lekit Yadav" bodyClass="project-detail">
+  <div class="project-header">
+    <h1 class="fluid-lg">Movie Recommender System</h1>
+  </div>
+
+  <div class="project-detail-layout">
+    <aside class="project-sidebar">
+      <dl class="project-meta">
+        <dt>Year</dt>
+        <dd>2024</dd>
+
+        <dt>Stack</dt>
+        <dd>Python, Pandas, NumPy, Scikit-learn</dd>
+
+        <dt>Type</dt>
+        <dd>Machine Learning</dd>
+
+        <dt>Source</dt>
+        <dd>
+          <a href="https://github.com/LekitYadav" target="_blank" rel="noopener" class="project-link">
+            View on GitHub
+          </a>
+        </dd>
+      </dl>
+    </aside>
+
+    <div class="project-main">
+      <div class="project-description">
+        <p class="mb-4">
+          A content-based recommendation engine built on the TMDB 5000 dataset. The system uses
+          cosine similarity on vectorized movie metadata to surface personalized top-N recommendations
+          in under a second.
+        </p>
+
+        <h2 class="fluid-sm mb-2">How It Works</h2>
+        <p class="mb-3">
+          Raw movie data — genres, cast, crew, keywords, and plot descriptions — is cleaned and
+          engineered into a feature-rich representation. Each movie becomes a vector in high-dimensional
+          space, and similarity between any two films is measured via cosine distance.
+        </p>
+
+        <h2 class="fluid-sm mb-2">Pipeline</h2>
+        <ul class="project-list">
+          <li>Data ingestion and cleaning with Pandas and NumPy — handling missing values, deduplication, and type normalization</li>
+          <li>Feature engineering from genres, cast (top 3 billing), director, and keyword tags</li>
+          <li>Count Vectorization to convert text metadata into numerical feature vectors</li>
+          <li>Cosine similarity matrix computed across the full corpus</li>
+          <li>Top-N recommendation function with sub-second query response</li>
+        </ul>
+
+        <h2 class="fluid-sm mb-2 mt-4">Key Decisions</h2>
+        <p>
+          Chose content-based filtering over collaborative filtering because the dataset lacks user rating
+          density. The cosine similarity approach avoids the cold-start problem entirely — any movie with
+          metadata can be recommended immediately. The modular pipeline design means swapping in a hybrid
+          approach later requires minimal refactoring.
+        </p>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style is:global>
+  :root {
+    --bg-dark: #1A1207;
+  }
+
+  body.project-detail {
+    background: var(--bg-dark) !important;
+    color: var(--text-inverse) !important;
+  }
+
+  .project-detail .nav,
+  .project-detail .footer {
+    background: var(--bg-dark);
+    border-color: rgba(255, 248, 238, 0.15);
+    mix-blend-mode: difference;
+  }
+
+  .project-detail .nav-left,
+  .project-detail .nav-center a,
+  .project-detail .nav-email,
+  .project-detail .footer-left,
+  .project-detail .footer-center a,
+  .project-detail .footer-right {
+    color: var(--text-inverse);
+  }
+
+  .project-header {
+    margin-bottom: calc(var(--gutter) * 3);
+  }
+
+  .project-detail-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: calc(var(--gutter) * 3);
+  }
+
+  .project-sidebar {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--gutter) * 2);
+    align-self: start;
+  }
+
+  .project-meta dt {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+    margin-top: 1.5em;
+    border-bottom: 1px solid rgba(255, 248, 238, 0.15);
+    padding-bottom: 0.3em;
+  }
+
+  .project-meta dt:first-child {
+    margin-top: 0;
+  }
+
+  .project-meta dd {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 0.5em;
+  }
+
+  .project-meta dd a {
+    color: var(--text-inverse);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .project-main {
+    font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    line-height: 1.7;
+  }
+
+  .project-main h2 {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .project-list {
+    padding-left: 1.2em;
+    list-style: none;
+  }
+
+  .project-list li {
+    position: relative;
+    padding-left: 1em;
+    margin-bottom: 0.75em;
+  }
+
+  .project-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    opacity: 0.5;
+  }
+
+  .project-link {
+    display: inline-block;
+    padding: 0.4em 1em;
+    border: 1px solid var(--text-inverse);
+    text-decoration: none !important;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  .project-link:hover {
+    background: var(--text-inverse);
+    color: var(--bg-dark);
+  }
+
+  @media (max-width: 768px) {
+    .project-detail-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .project-sidebar {
+      position: static;
+    }
+  }
+</style>
