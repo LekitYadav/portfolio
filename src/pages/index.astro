@@ -234,6 +234,24 @@ const projects = [
       history.replaceState(null, '', window.location.pathname);
     }
 
+    /* ── Client-side rate limit: 60s cooldown between submissions ── */
+    const form = document.querySelector('.hi-form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        const last = parseInt(localStorage.getItem('contact_last_submit') || '0', 10);
+        if (last && Date.now() - last < 60000) {
+          e.preventDefault();
+          const el = document.getElementById('sent-msg');
+          if (el) {
+            el.textContent = 'Please wait a moment before sending another message.';
+            el.style.display = 'block';
+          }
+          return;
+        }
+        localStorage.setItem('contact_last_submit', String(Date.now()));
+      });
+    }
+
     syncFromHash();
   }
 
